@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (strong, nonatomic) NSMutableArray *otherCards;
 @property (readwrite, nonatomic) int score;
+@property (nonatomic, readwrite) NSString *flipResult;
 @end
 
 @implementation CardMatchingGame
@@ -62,11 +63,13 @@
    BOOL cardIsPlayable = !card.isUnplayable;
    //The card is already face up, so it just needs to be turned back over.
    if (card.faceUp && cardIsPlayable) {
+      self.flipResult = [NSString stringWithFormat:@"%@ flipped",card.contents];
       self.score += FLIP_COST;
       card.faceUp = !card.faceUp;
       [self.otherCards removeObjectIdenticalTo:card];
    } else {
       if (cardIsPlayable) {
+         self.flipResult = [NSString stringWithFormat:@"%@ flipped",card.contents];
          self.score += FLIP_COST;
          //The card is face down, so it needs to be turned face up.
          card.faceUp = YES;
@@ -76,6 +79,12 @@
             int matchScore = [card match:self.otherCards];
             if (matchScore) {
                //If there is a score, make cards unplayable.
+               self.flipResult = card.contents;
+               for (Card *otherCard in self.otherCards) {
+                  self.flipResult = [self.flipResult stringByAppendingString:[NSString stringWithFormat:@",%@",otherCard.contents]];
+               }
+               self.flipResult = [self.flipResult stringByAppendingString:[NSString stringWithFormat:@" matched: %d",matchScore]];
+               NSLog(@"Flip result is %@",self.flipResult);
                card.Unplayable = YES;
                card.faceUp = YES;
                for (Card *otherCard in self.otherCards) {
@@ -84,6 +93,7 @@
                }
                [self.otherCards removeAllObjects];
             } else {
+               self.flipResult = @"No match - flip oldest card";
                //There was no score. Assess a penalty and turn oldest card over.
                //If the result of the match is 0, then turn the oldest card face down.
                Card *oldestCard = self.otherCards[0];
