@@ -23,6 +23,7 @@
 		A7081ECE16BB0EA0003C174C /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A7081ECD16BB0EA0003C174C /* PlayingCard.m */; };
 		A7081ED116BB1111003C174C /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = A7081ED016BB1111003C174C /* PlayingCardDeck.m */; };
 		A7081ED416BC4554003C174C /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = A7081ED316BC4554003C174C /* CardMatchingGame.m */; };
+		A7081ED616C04E77003C174C /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = A7081ED516C04E77003C174C /* cardback.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		A7081ED016BB1111003C174C /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
 		A7081ED216BC4554003C174C /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMatchingGame.h; sourceTree = "<group>"; };
 		A7081ED316BC4554003C174C /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMatchingGame.m; sourceTree = "<group>"; };
+		A7081ED516C04E77003C174C /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				A7081ECD16BB0EA0003C174C /* PlayingCard.m */,
 				A7081ECF16BB1111003C174C /* PlayingCardDeck.h */,
 				A7081ED016BB1111003C174C /* PlayingCardDeck.m */,
+				A7081ED516C04E77003C174C /* cardback.png */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				A7081EB416BAFB1F003C174C /* Default@2x.png in Resources */,
 				A7081EB616BAFB1F003C174C /* Default-568h@2x.png in Resources */,
 				A7081EB916BAFB1F003C174C /* MainStoryboard.storyboard in Resources */,
+				A7081ED616C04E77003C174C /* cardback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,10 +14,13 @@
 -(id) initWithCardCount:(NSUInteger)cardCount
               usingDeck:(Deck *)deck;
 
--(void)flipCardAtIndex:(NSUInteger)index;
+-(void)flipCardAtIndex:(NSUInteger)index gameMode:(NSUInteger)gameMode;
 
 -(Card *)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) int score;
+@property (nonatomic, readonly) NSString *flipResult;
+@property (nonatomic) NSInteger gameMode; //2 = match 2 cards, 3 = match 3 cards
+
 
 @end
