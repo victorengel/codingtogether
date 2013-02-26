@@ -24,6 +24,7 @@
                   card.shading = shading;
                   card.color = color;
                   [self addCard:card atTop:YES];
+                  //NSLog(@"Adding card %@",card.contents);
                }
             }
          }

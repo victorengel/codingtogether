@@ -49,7 +49,9 @@
 
 -(Card *)cardAtIndex:(NSUInteger)index
 {
-   return (index < self.cards.count) ? self.cards[index] : nil;
+   NSLog(@"CardMatchingGame-cardAtIndex %d",index);
+   NSLog(@"%d cards in self.cards",[self.cards count]);
+   return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
 #define MATCH_BONUS 4

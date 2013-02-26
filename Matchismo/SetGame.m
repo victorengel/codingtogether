@@ -17,6 +17,19 @@
 
 @implementation SetGame
 
+-(NSMutableArray *)cards
+{
+   if (!_cards) _cards = [[NSMutableArray alloc] init];
+   return _cards;
+}
+
+-(NSMutableArray *)otherCards
+{
+   if (!_otherCards) _otherCards = [[NSMutableArray alloc] init];
+   return _otherCards;
+}
+
+
 //-(NSMutableArray *)cards
 //-(NSMutableArray *)otherCards
 //-(Card *)cardAtIndex:(NSUInteger)index
@@ -24,6 +37,8 @@
 
 -(id)initWithCardCount:(NSUInteger)cardCount usingDeck:(Deck *)deck
 {
+   NSLog(@"Initialize set game using %d cards",cardCount);
+   NSLog(@"Use deck with %d cards",deck.cardCount);
    self = [super initWithCardCount:cardCount usingDeck:deck];
    self.gameMode = 3;
    return self;
@@ -48,11 +63,11 @@
          int totalCards = 1 + [self.otherCards count];
          if (totalCards == gameMode) {
             int matchScore = [card match:self.otherCards];
-            if (matchScore) {
+            if (matchScore == 4) {
                //If there is a score, make cards unplayable.
                self.flipResult = card.contents;
                for (Card *otherCard in self.otherCards) {
-                  self.flipResult = [self.flipResult stringByAppendingString:[NSString stringWithFormat:@",%@",otherCard.contents]];
+                  self.flipResult = [self.flipResult stringByAppendingString:[NSString stringWithFormat:@" %@",otherCard.contents]];
                }
                self.flipResult = [self.flipResult stringByAppendingString:[NSString stringWithFormat:@" matched: %d",matchScore]];
                NSLog(@"Flip result is %@",self.flipResult);
@@ -63,6 +78,7 @@
                   otherCard.unplayable = YES;
                }
                [self.otherCards removeAllObjects];
+               self.score += 1;
             } else {
                self.flipResult = @"No match - flip oldest card";
                //There was no score. Assess a penalty and turn oldest card over.
@@ -72,8 +88,8 @@
                [self.otherCards removeObjectAtIndex:0];
                //Now add the current card to the otherCards array.
                [self.otherCards addObject:card];
+               self.score -= 1;
             }
-            self.score += matchScore;
          } else {
             [self.otherCards addObject:card];
          }
@@ -89,36 +105,6 @@
 @end
 
 @implementation CardMatchingGame
-
--(NSMutableArray *)cards
-{
-   if (!_cards) _cards = [[NSMutableArray alloc] init];
-   return _cards;
-}
-
--(NSMutableArray *)otherCards
-{
-   if (!_otherCards) _otherCards = [[NSMutableArray alloc] init];
-   return _otherCards;
-}
-
--(id)initWithCardCount:(NSUInteger)cardCount usingDeck:(Deck *)deck
-{
-   self = [super init];
-   if (self) {
-      for (int i=0; i<=cardCount; i++) {
-         Card *card = [deck drawRandomCard];
-         if (!card) {
-            self = nil; //This can happen if there are not enough cards in the deck.
-            break;
-         } else {
-            self.cards[i] = card;
-         }
-      }
-   }
-   self.gameMode = 2;
-   return self;
-}
 
 -(Card *)cardAtIndex:(NSUInteger)index
 {
